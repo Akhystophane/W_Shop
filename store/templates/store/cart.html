@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if total_items <= 0 %}
+    <p>Cart is empty...</p>
+{% else %}
+
+<section class="h-100 gradient-custom">
+
+  <div class="row">
+    <div class="box-element m-4">
+        <a  class="btn btn-outline-dark" href="{% url 'index' %}">&#x2190; Continue Shopping</a>
+    </div>
+    <div class="col-8 d-flex ">
+      <div class="">
+        <div class="card m-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Cart - {{ total_items }} items</h5>
+          </div>
+          <div class="card-body">
+            <!-- Single item -->
+              {% for order in orders %}
+            <div class="row">
+              <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                <!-- Image -->
+                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                  <img src="{{ order.product.thumbnail.url }}"
+                    class="w-100" />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                  </a>
+                </div>
+                <!-- Image -->
+              </div>
+
+              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                <!-- Data -->
+                <p><strong>{{ order.product.name }}</strong></p>
+                <a href="{%  url 'del_product' order.product.slug %}">
+                <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                  title="Remove item">
+                  <i class="fas fa-trash"></i>
+                </button>
+                </a>
+<!--                <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"-->
+<!--                  title="Move to the wish list">-->
+<!--                  <i class="fas fa-heart"></i>-->
+<!--                </button>-->
+                <!-- Data -->
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <!-- Quantity -->
+                  <div class="d-flex mb-4" style="max-width: 300px">
+                      <a href="{% url 'decrement_cart' order.product.slug %}">
+                          <button class="btn btn-primary px-3 me-2">
+                              <i class="fas fa-minus"></i>
+                          </button>
+                      </a>
+
+                    <div class="form-outline">
+                      <label class="form-label">Quantity</label>
+                      <input id="form1" min="0" name="quantity" value="{{ order.quantity }}" class="form-control"/>
+                    </div>
+
+                  <div class="d-flex mb-4" style="max-width: 300px">
+                          <a href="{% url 'increment_cart' order.product.slug %}">
+                              <button class="btn btn-primary px-3 me-2">
+                                  <i class="fas fa-plus"></i>
+                              </button>
+                          </a>
+                  </div>
+                <!-- Quantity -->
+
+                <!-- Price -->
+              </div>
+                <p class="text-start text-md-center">
+                  <strong>${{ order.product.price }}</strong>
+                </p>
+              </div>
+              </div>
+              {% endfor %}
+              <!-- Single item -->
+
+        </div>
+
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body">
+            <p><strong>We accept</strong></p>
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+              alt="Visa" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+              alt="American Express" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+              alt="Mastercard" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
+              alt="PayPal acceptance mark" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-md-4 ">
+      <div class="card m-4 ">
+        <div class="card-header py-3">
+            <h5 class="mb-0">Summary</h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span>${{ total.cost__sum }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping
+                <span>Gratis</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                </div>
+                <span><strong>${{ total.cost__sum }}</strong></span>
+              </li>
+                <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <p><strong>Expected shipping delivery</strong></p>
+                        <p class="mb-0">12.10.2020 - 14.10.2020</p>
+                      </div>
+                    </div>
+                </li>
+            </ul>
+<!--            <a href="{% url 'checkout' %}">-->
+                <button onclick="myFunction()" type="button" class="btn btn-primary btn-lg btn-block">
+                  Payment
+                </button>
+                <div id="myDIV" style="display: none;">
+                  <div class="box-element " id="payment-info">
+                      <small>Paypal Options</small>
+                      <div id="paypal-button-container"></div>
+                  </div>
+                </div>
+<!--            </a>-->
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+      <script src="https://www.paypal.com/sdk/js?client-id=Aai8LkbDt-GikuZFayFQaEjDB1VxKLI4-mPflEVRsEuxO1MQY1JHSGNAEwuVMkJ7wih-JbfjZ72NrrH3&currency=USD"></script>
+          <script>
+              // Render the PayPal button into #paypal-button-container
+              paypal.Buttons({
+
+                  // Set up the transaction
+                  createOrder: function(data, actions) {
+                      return actions.order.create({
+                          purchase_units: [{
+                              amount: {
+                                  value: {{ total.cost__sum }}
+                              }
+                          }]
+                      });
+                  },
+
+                  // Finalize the transaction
+                  onApprove: function(data, actions) {
+                      return actions.order.capture().then(function(orderData) {
+                          // Successful capture! For demo purposes:
+                          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                          var transaction = orderData.purchase_units[0].payments.captures[0];
+                          alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                          // Replace the above to show a success message within this page, e.g.
+                          // const element = document.getElementById('paypal-button-container');
+                          // element.innerHTML = '';
+                          // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                          // Or go to another URL:  actions.redirect('thank_you.html');
+                      });
+                  }
+
+
+              }).render('#paypal-button-container');
+      </script>
+
+      <script>
+
+          function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+              x.style.display = "block";
+            } else {
+              x.style.display = "none";
+            }
+  }
+      </script>
+
+</section>
+    {% if total_items > 0 %}
+        <a href="{% url 'delete-cart' %}">Supprimer le panier</a>
+    {% endif %}
+{% endif %}
+
+
+    {% include 'footer.html' %}
+{% endblock %}

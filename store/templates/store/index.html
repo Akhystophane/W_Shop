@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<!--    <div class="py-4">-->
+<!--        <div class="box-element product">-->
+<!--            <img class="thumbnail" src="{{ product.thumbnail.url }}" alt="{{ product.name }}">-->
+<!--            <h4 style="display: inline-block"><strong>{{ product.name }} {{ product.price }}€</strong></h4>-->
+<!--        </div>-->
+<!--	</div>-->
+
+    <!-- collection -->
+    <section id = "collection" class = "py-5">
+        <div class = "container">
+            <div class = "title text-center">
+                <h2 class = "position-relative d-inline-block">New Collection</h2>
+            </div>
+            <div class = "row g-0">
+                <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                    <a href="{% url 'index' %}"><button type = "button" class = "btn m-2 text-dark active-filter-btn" data-filter = "*">All</button></a>
+                    <a href="{% url 'best_seller' %}"><button type = "button" class = "btn m-2 text-dark" data-filter = ".best">Best Sellers</button></a>
+                    <a href="{% url 'featured' %}"><button type = "button" class = "btn m-2 text-dark" data-filter = ".feat">Featured</button></a>
+                    <a href="{% url 'new_arrival' %}"><button type = "button" class = "btn m-2 text-dark" data-filter = ".new">New Arrival</button></a>
+                </div>
+                <div class = "collection-list mt-8 gx-0 gy-10">
+                {% for product in products %}
+
+                        <div class = "col-md-6 col-lg-4 col-xl-4 p-2 mb-10 best">
+                            <div class = "collection-img position-relative ">
+                                <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}" class = "w-100" style="width:330 px; height: 640 px;">
+                                <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">sale</span>
+                            </div>
+                            <div class="d-flex justify-content-sm-around">
+
+<!--                                    <a class="btn btn-outline-success mt-2" href="{{ product.get_absolute_url }}"> Voir article</a>-->
+                                <a href="{{ product.get_absolute_url }}"><button type = "button" class = "btn btn-sm btn-outline-success  mt-2 ">Voir article</button></a>
+                                <a href="{% url 'add-to-cart' product.slug %}"><button type = "button" class = "btn mt-2 ml-4 btn-sm">Add to Cart</button></a>
+<!--                                    <a  class="btn btn-outline-success mt-2" href="{% url 'add-to-cart' product.slug %}">Add to Cart</a>-->
+                            </div>
+                            <div class = "text-center">
+<!--                                <b><p class = "text-capitalize my-1">{{ product.name }}</p></b>-->
+                                <span class = "fw-bold">{{ product.name }}</span>
+                                <div class = "rating mt-1">
+                                    <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                    <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                    <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                    <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                    <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                </div>
+                                <span class = "fw-bold">${{ product.price }}</span>
+
+                            </div>
+                        </div>
+                {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of collection -->
+
+
+    {% include 'footer.html' %}
+
+{% endblock %}

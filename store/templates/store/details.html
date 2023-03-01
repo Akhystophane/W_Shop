@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--<p> {{ product.stock }} en stock</p>-->
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+
+            <div class="col-md-6">
+                <!--            carousel-->
+            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                {% if product.image1 %}
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                {% endif %}
+                {% if product.image2 %}
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                {% endif %}
+                {% if product.image3 %}
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                {% endif %}
+                {% if product.image4 %}
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 4"></button>
+                {% endif %}
+                {% if product.image5 %}
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 4"></button>
+                {% endif %}
+              </div>
+              <div class="carousel-inner">
+                {% if product.thumbnail %}
+                <div class="carousel-item active">
+                  <img src="{{ product.thumbnail.url }}" class="d-block w-100" alt="...">
+                </div>
+                  {% endif %}
+                {% if product.image1 %}
+                <div class="carousel-item ">
+                  <img src="{{ product.image1.url }}" class="d-block w-100" alt="...">
+                </div>
+                  {% endif %}
+                {% if product.image2 %}
+                <div class="carousel-item">
+                  <img src="{{ product.image2.url }}" class="d-block w-100" alt="...">
+                </div>
+                  {% endif %}
+              {% if product.image3 %}
+                <div class="carousel-item">
+                  <img src="{{ product.image3.url }}" class="d-block w-100" alt="...">
+                </div>
+              {% endif %}
+              {% if product.image4 %}
+                <div class="carousel-item">
+                  <img src="{{ product.image4.url }}" class="d-block w-100" alt="...">
+                </div>
+              {% endif %}
+              {% if product.image5 %}
+                <div class="carousel-item">
+                  <img src="{{ product.image5.url }}" class="d-block w-100" alt="...">
+                </div>
+              {% endif %}
+
+              </div>
+
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+<!--            end of carousel -->
+<!--                <img class="card-img-top mb-5 mb-md-0" src="{{ product.thumbnail.url }}" alt="{{ product.name }}">-->
+    </div>
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: BST-498</div>
+                <h1 class="display-5 fw-bolder">{{ product.name }}</h1>
+                <div class="fs-5 mb-5">
+                    <span class="text-decoration-line-through">$45.00</span>
+                    <span>{{ product.price }}€</span>
+                </div>
+                <p class="lead">{{ product.description }}</p>
+                <div class="d-flex">
+                <p>
+                    <a  class="btn btn-outline-secondary add-btn" href="{% url 'add-to-cart' product.slug %}">Add to Cart</a>
+                </p>                        <i class="bi-cart-fill me-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    {% include 'footer.html' %}
+{% endblock %}
