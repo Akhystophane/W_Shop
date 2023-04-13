@@ -130,3 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 AUTH_USER_MODEL = "accounts.Shopper"
+
+CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','https://*.appu-36mkimdk4q-uc.a.run.app','https://*.127.0.0.1', 'http://127.0.0.1:8000']
