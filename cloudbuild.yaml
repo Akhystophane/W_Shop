@@ -20,7 +20,7 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "$_SERVICE_NAME"
+      - "my-backend"
       - "--image"
       - "gcr.io/woshop/github.com/akhystophane/w_shop:$COMMIT_SHA"
       - "--region"
