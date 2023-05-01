@@ -13,8 +13,8 @@
    - 'deploy'
    - 'SERVICE-NAME'
    - '--image'
-   - 'gcr.io/$PROJECT_ID/SERVICE-NAME:$COMMIT_SHA'
+   - 'gcr.io/$PROJECT_ID/$COMMIT_SHA'
    - '--region'
    - 'REGION'
  images:
- - 'gcr.io/$PROJECT_ID/SERVICE-NAME/$COMMIT_SHA'
+ - 'gcr.io/$PROJECT_ID/$COMMIT_SHA'
