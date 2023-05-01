@@ -8,7 +8,7 @@ steps:
         "--platform",
         "linux/amd64",
         "-t",
-        "gcr.io/woshop/github.com/akhystophane/w_shop:$COMMIT_SHA:v0.1.0",
+        "gcr.io/woshop/github.com/akhystophane/w_shop:$COMMIT_SHA",
         ".",
       ]
   # Push the image to Container Registry
@@ -23,7 +23,7 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "my-backend"
+      - "appu"
       - "--image"
       - "gcr.io/woshop/github.com/akhystophane/w_shop:$COMMIT_SHA"
       - "--region"
