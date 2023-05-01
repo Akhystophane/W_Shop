@@ -20,7 +20,6 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "[SERVICE_NAME]"
       - "--image"
       - "gcr.io/woshop/github.com/akhystophane/w_shop:$COMMIT_SHA"
       - "--region"
