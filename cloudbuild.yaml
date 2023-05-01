@@ -8,7 +8,7 @@ steps:
         "--platform",
         "linux/amd64",
         "-t",
-        "gcr.io/woshop/github.com/akhystophane/w_shop:$COMMIT_SHA",
+        "gcr.io/woshop/github.com/akhystophane/w_shop:$COMMIT_SHA:v0.1.0",
         ".",
       ]
   # Push the image to Container Registry
