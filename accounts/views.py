@@ -19,7 +19,7 @@ def login_user(request):
         if user:
             login(request, user)
             return redirect('index')
-    return render(request, 'accounts/signup.html')
+    return render(request, 'accounts/login.html')
 
 def logout_user(request):
     logout(request)
